@@ -59,7 +59,7 @@
     "react-bootstrap": "^2.4.0",
     "react-dom": "^18.1.0"
   },
-  "resolutions": {
+  "overrides": {
     "autoprefixer": "10.4.5"
   }
 }
