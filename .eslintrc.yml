@@ -38,6 +38,8 @@ rules:
   import/no-unresolved: 0
   import/no-extraneous-dependencies: 0
   react/prefer-stateless-function: 0
+  functional/no-class: 0
+  functional/no-this-expression: 0
   react/function-component-definition: [
   2,
   {
@@ -45,4 +47,3 @@ rules:
     namedComponents: "arrow-function",
   },
 ]
-#react/jsx-filename-extension: 0
