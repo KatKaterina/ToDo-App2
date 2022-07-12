@@ -18,8 +18,10 @@ const FormTask = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    addTask(textTask);
-    setTextTask('');
+    if (textTask) {
+      addTask(textTask);
+      setTextTask('');
+    }
   };
 
   return (
