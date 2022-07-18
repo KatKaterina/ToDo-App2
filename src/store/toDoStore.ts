@@ -1,31 +1,32 @@
 import { makeAutoObservable } from 'mobx';
+import { Task } from '../types/data';
 
 const localStorageKey = 'todo-app';
 
-const initState = localStorage.getItem(localStorageKey)
-  ? JSON.parse(localStorage.getItem(localStorageKey))
+const initState:  Array<Task> = localStorage.getItem(localStorageKey)
+  ? JSON.parse(localStorage.getItem(localStorageKey) || '{}')
   : [];
 
 class ToDo {
-  tasks = initState;
+  tasks: Array<Task> = initState;
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  addTask = (textTask) => {
+  addTask = (textTask: string) => {
     const id = `t${Date.now()}`;
-    const newTask = { id, text: textTask, isDone: false };
+    const newTask: Task = { id, text: textTask, isDone: false };
     this.tasks.push(newTask);
     localStorage.setItem(localStorageKey, JSON.stringify(this.tasks));
   };
 
-  deleteTask = (idTask) => {
+  deleteTask = (idTask: string) => {
     this.tasks = this.tasks.filter((item) => item.id !== idTask);
     localStorage.setItem(localStorageKey, JSON.stringify(this.tasks));
   };
 
-  changeTask = (idTask = null) => {
+  changeTask = (idTask: string | null = null) => {
     const activeTasksCount = this.tasks.filter(({ isDone }) => !isDone).length;
     const updatedTasks = this.tasks.map((item) => {
       if (idTask === null) {

@@ -3,7 +3,11 @@ import { Row, Col } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 import toDoStore from '../store/toDoStore';
 
-const Tasks = observer((props) => {
+interface TaskProps {
+  filterTask: string;
+}
+
+const Tasks: React.FC<TaskProps> = observer((props) => {
   const { filterTask } = props;
   const { tasks, changeTask, deleteTask } = toDoStore;
   let filtredTasks = tasks;
@@ -13,11 +17,11 @@ const Tasks = observer((props) => {
     filtredTasks = tasks.filter(({ isDone }) => isDone);
   }
 
-  const handleChange = (id) => () => {
+  const handleChange = (id: string) => () => {
     changeTask(id);
   };
 
-  const handleDelete = (id) => () => {
+  const handleDelete = (id: string) => () => {
     deleteTask(id);
   };
 

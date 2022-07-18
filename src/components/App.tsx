@@ -4,8 +4,8 @@ import FormTask from './FormTask';
 import Tasks from './Tasks';
 import TasksControl from './TasksControl';
 
-const App = () => {
-  const [filterTask, setFilterTask] = useState('all');
+const App: React.FC = () => {
+  const [filterTask, setFilterTask] = useState<string>('all');
   return (
     <div className="container-main container">
       <header>

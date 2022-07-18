@@ -3,20 +3,20 @@ import { Row, Col, Form } from 'react-bootstrap';
 import toDoStore from '../store/toDoStore';
 
 const FormTask = () => {
-  const [textTask, setTextTask] = useState('');
+  const [textTask, setTextTask] = useState<string>('');
   const { addTask, changeTask } = toDoStore;
 
-  const inputRef = useRef();
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
-    inputRef.current.focus();
+    if (inputRef.current) inputRef.current.focus();
   }, []);
 
-  const handleChange = (e) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setTextTask(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.MouseEvent<HTMLButtonElement> | React.FormEvent) => {
     e.preventDefault();
     if (textTask) {
       addTask(textTask);

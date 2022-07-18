@@ -1,19 +1,24 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState } from 'react';
 import { Row } from 'react-bootstrap';
 import { observer } from 'mobx-react-lite';
 import toDoStore from '../store/toDoStore';
 
-const TasksControl = observer((props) => {
+interface TasksControlProps {
+  setFilterTask: (filter: string) => void;
+}
+
+const TasksControl: React.FC<TasksControlProps> = observer((props) => {
   const { setFilterTask } = props;
   const { deleteIsDone, tasks } = toDoStore;
   const [activeButton, setActiveButton] = useState('all');
 
   const activeTasksCount = tasks.filter(({ isDone }) => !isDone).length;
 
-  const handlerClick = (e) => {
-    setFilterTask(e.target.name);
-    setActiveButton(e.target.name);
+  const handlerClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    setFilterTask(e.currentTarget.getAttribute('name') || '');
+    setActiveButton(e.currentTarget.getAttribute('name') || '');
   };
+
   const itemsView = activeTasksCount === 1 ? `${activeTasksCount} item left` : `${activeTasksCount} items left`;
   return (
     <Row className="tasks-control justify-content-between align-items-center">
