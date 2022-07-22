@@ -42,6 +42,10 @@ class ToDo {
     this.tasks = this.tasks.filter(({ isDone }) => !isDone);
     localStorage.setItem(localStorageKey, JSON.stringify(this.tasks));
   };
+
+  get activeTasksCount(): number {
+    return this.tasks.filter(({ isDone }) => !isDone).length;
+  };
 }
 
 export default new ToDo();

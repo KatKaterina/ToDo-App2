@@ -9,10 +9,8 @@ interface TasksControlProps {
 
 const TasksControl: React.FC<TasksControlProps> = observer((props) => {
   const { setFilterTask } = props;
-  const { deleteIsDone, tasks } = toDoStore;
+  const { deleteIsDone, tasks, activeTasksCount } = toDoStore;
   const [activeButton, setActiveButton] = useState('all');
-
-  const activeTasksCount = tasks.filter(({ isDone }) => !isDone).length;
 
   const handlerClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     setFilterTask(e.currentTarget.getAttribute('name') || '');
